@@ -69,7 +69,7 @@ window.addEventListener('DOMContentLoaded', function() {
                 minutes.textContent = '00';
                 seconds.textContent = '00';
             }
-            // if (t.hours < 10) t.minutes < 10 || t.seconds < 10) {
+            // if (t.hours < 10) {
             //     hours.textContent = '0' + t.hours;
             // }
             // if (t.minutes < 10) {
