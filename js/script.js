@@ -45,9 +45,9 @@ window.addEventListener('DOMContentLoaded', function() {
 
         return {
             'total' : t,
-            'hours' : hours.toString().padStart(2,'0'),
+            'hours' : hours,
             'minutes' : minutes,
-            'seconds' : seconds.toString().padStart(2,'0')
+            'seconds' : seconds
         };
     }
 
@@ -60,27 +60,41 @@ window.addEventListener('DOMContentLoaded', function() {
 
         function updateClock() {
             let t = getTimeRemaining(endtime);
-            hours.textContent = t.hours;
-            minutes.textContent = t.minutes;
-            seconds.textContent = t.seconds;
+            function addZero(num){
+                if(num <= 9) {
+                    return '0' + num;
+                } else return num;
+            };
+
+    hours.textContent = addZero(t.hours);
+    minutes.textContent = addZero(t.minutes);
+    seconds.textContent = addZero(t.seconds);
+           
             if (t.total <= 0) {
                 clearInterval(timeInterval);
                 hours.textContent = '00';
                 minutes.textContent = '00';
                 seconds.textContent = '00';
             }
-            // if (t.hours < 10) {
-            //     hours.textContent = '0' + t.hours;
-            // }
-            // if (t.minutes < 10) {
-            //     minutes.textContent = '0' + t.minutes;
-            // }
-            // if (t.seconds < 10) {
-            //     seconds.textContent = '0' + t.seconds;
-            // }
             
         }
     }
 
     setClock('timer', deadline);
+
+
+    let more = document.querySelector('.more'),
+        overlay = document.querySelector('.overlay'),
+        close = document.querySelector('.popup-close');
+
+    more.addEventListener('click', function() {
+    overlay.style.display = 'block';
+        this.classList.add('more-splash');
+        document.body.style.overflow = 'hidden';
+    });
+    close.addEventListener('click', function() {
+        overlay.style.display = 'none';
+        more.classList.remove('more-splash');
+        document.body.style.overflow = '';
+    });
 });
